@@ -1,6 +1,6 @@
-import '@styles/globals.css';
-import Navbar from '@components/Navbar';
-import SessionProvider from '@components/Provider';
+import 'styles/globals.css'
+import Navbar from 'components/Navbar';
+import SessionProvider from 'components/Provider';
 
 const metadata = {
   title: "Promptopia",
