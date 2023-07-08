@@ -4,11 +4,20 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@components/Form";
+import { useSession } from "next-auth/react";
 
 const UpdatePrompt = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
+  const { data:session } = useSession({
+    required:true,
+    onUnauthenticated(){
+      if(!session){
+        router.push('/')
+      }
+    }
+  })
 
   const [post, setPost] = useState({ prompt: "", tag: "", });
   const [submitting, setIsSubmitting] = useState(false);

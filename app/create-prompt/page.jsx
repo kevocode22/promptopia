@@ -3,12 +3,29 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 import Form from "@components/Form";
 
 const CreatePrompt = () => {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session } = useSession({
+    required:true,
+    onUnauthenticated(){
+      if(!session){
+        Swal.fire({
+          title: 'You need to sign-in to create a prompt',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        }),
+        router.push('/')
+      }
+    }
+  });;
 
   const [submitting, setIsSubmitting] = useState(false);
   const [post, setPost] = useState({ prompt: "", tag: "" });

@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,16 +8,14 @@
   Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
 */
 
-/* .main {
-  width: 100vw;
+.main {
+  width: 100%;
   min-height: 100vh;
-  position: fixed;
   display: flex;
   justify-content: center;
   padding: 120px 24px 160px 24px;
-  pointer-events: none;
-} */
-/* 
+}
+
 .main:before {
   background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
   position: absolute;
@@ -39,7 +36,7 @@
   top: 0;
   opacity: 0.4;
   filter: invert(1);
-} */
+}
 
 .gradient {
   height: fit-content;
@@ -119,7 +116,7 @@
 }
 
 .prompt_layout {
-  @apply space-y-6 py-8 sm:columns-2 sm:gap-6 xl:columns-3;
+  @apply space-y-6 py-8 sm:columns-2 sm:gap-6 xl:columns-2;
 }
 
 /* Feed Component */
@@ -138,7 +135,7 @@
 
 /* Nav Component */
 .logo_text {
-  @apply max-sm:hidden font-['Bebas_Neue'] text-xl text-black tracking-wide leading-10;
+  @apply max-sm:hidden font-satoshi font-semibold text-lg text-black tracking-wide;
 }
 
 .dropdown {

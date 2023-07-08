@@ -3,9 +3,9 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 import Profile from "@components/Profile";
-import Swal from 'sweetalert2'
 import 'animate.css';
 
 
@@ -13,7 +13,24 @@ import 'animate.css';
 
 const MyProfile = () => {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session } = useSession({
+    required:true,
+    onUnauthenticated(){
+      if(!session){
+        Swal.fire({
+          title: 'You need to sign-in to see your profile',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        }),
+        router.push('/')
+      }
+    }
+  });
+  console.log( session )
   const [myPosts, setMyPosts] = useState([]);
   useEffect(() => {
     const fetchPosts = async () => {
