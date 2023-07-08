@@ -5,13 +5,16 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import Profile from "@components/Profile";
+import Swal from 'sweetalert2'
+import 'animate.css';
+
+
+
 
 const MyProfile = () => {
   const router = useRouter();
   const { data: session } = useSession();
-
   const [myPosts, setMyPosts] = useState([]);
-
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await fetch(`/api/users/${session?.user.id}/posts`);
@@ -28,29 +31,43 @@ const MyProfile = () => {
   };
 
   const handleDelete = async (post) => {
-    const hasConfirmed = confirm(
-      "Are you sure you want to delete this prompt?"
-    );
-
-    if (hasConfirmed) {
-      try {
-        await fetch(`/api/prompt/${post._id.toString()}`, {
-          method: "DELETE",
-        });
-
-        const filteredPosts = myPosts.filter((item) => item._id !== post._id);
-
-        setMyPosts(filteredPosts);
-      } catch (error) {
-        console.log(error);
+    const hasConfirmed = Swal.fire({
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      title: 'Are you sure to delete?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed && hasConfirmed) {
+        try {
+          fetch(`/api/prompt/${post._id.toString()}`, {
+            method: "DELETE",
+          });
+  
+          const filteredPosts = myPosts.filter((item) => item._id !== post._id);
+  
+          setMyPosts(filteredPosts);
+        } catch (error) {
+          console.log(error);
+        }
       }
-    }
+    })
+
+    
   };
 
   return (
     <Profile
-      name='My'
-      desc='Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination'
+      name="My"
+      desc="Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination"
       data={myPosts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}

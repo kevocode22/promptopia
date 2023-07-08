@@ -9,7 +9,6 @@ const UpdatePrompt = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
-  console.log(promptId)
 
   const [post, setPost] = useState({ prompt: "", tag: "", });
   const [submitting, setIsSubmitting] = useState(false);
@@ -54,6 +53,7 @@ const UpdatePrompt = () => {
   };
 
   return (
+    <>
     <Form
       type='Edit'
       post={post}
@@ -61,7 +61,8 @@ const UpdatePrompt = () => {
       submitting={submitting}
       handleSubmit={updatePrompt}
     />
-  );
+    </>
+    );
 };
 
 export default UpdatePrompt;

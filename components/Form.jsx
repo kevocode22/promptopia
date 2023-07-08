@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
   return (
     <section className='w-full max-w-full flex-start flex-col'>
@@ -57,7 +58,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             disabled={submitting}
             className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white'
           >
-            {submitting ? `${type}ing...` : type}
+            {submitting ? `Creating...` : type}
           </button>
         </div>
       </form>
