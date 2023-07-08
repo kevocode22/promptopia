@@ -10,6 +10,9 @@ const metadata = {
 const RootLayout = ({children}) => {
   return(
   <html lang="en">
+    <head>
+    <link rel="icon" href="/assets/icons/logo.ico" sizes="any" />
+    </head>
     <body>
       <SessionProvider>
       <div className="main">
